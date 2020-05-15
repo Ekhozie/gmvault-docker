@@ -37,7 +37,7 @@ that effect, you will need to go through the following set up the first time
 you run this container:
 
 1. Attach a terminal to your container.
-2. Run this command: `su -c 'gmvault sync -d /data ${GMVAULT_EMAIL_ADDRESS}' gmvault`
+2. Run this command: `su -c 'gmvault sync -p --store-passwd --type quick -d /data ${GMVAULT_EMAIL_ADDRESS}' gmvault`
 3. Go to the URL indicated, and copy the token back.
 4. Once the synchronization process starts, restart the container.
 
@@ -48,10 +48,10 @@ Volumes
 The container requires the following volumes to be attached in order to work
 properly:
 
-* **`/data`**  
+* **`/data`**
 	Where the OAuth token, email backups, and logs will be stored.
 
-* **`/etc/ssmtp/ssmtp.conf`**  
+* **`/etc/ssmtp/ssmtp.conf`**
 	A ssmtp config file to send emails reports from the Docker container.
 
 	Example for Gmail:
@@ -74,31 +74,31 @@ Environment Variables
 
 The container is configurable through the following environment variables:
 
-* **`GMVAULT_EMAIL_ADDRESS`** *(required)*  
+* **`GMVAULT_EMAIL_ADDRESS`** *(required)*
 	The email address of the account to back up.
 
-* **`GMVAULT_SEND_REPORTS_TO`** *(optional)*  
+* **`GMVAULT_SEND_REPORTS_TO`** *(optional)*
 	The email address to send reports to; defaults to `GMVAULT_EMAIL_ADDRESS`.
 
-* **`GMVAULT_UID`** *(optional)*  
+* **`GMVAULT_UID`** *(optional)*
 	Numeric uid in the host that should own created files; defaults to 9000.
 
-* **`GMVAULT_GID`** *(optional)*  
+* **`GMVAULT_GID`** *(optional)*
 	Numeric gid in the host that should own created files; defaults to 9000.
 
-* **`GMVAULT_TIMEZONE`** *(optional)*  
+* **`GMVAULT_TIMEZONE`** *(optional)*
 	Timezone; defaults to America/Los_Angeles.
 
-* **`GMVAULT_OPTIONS`** *(optional)*  
+* **`GMVAULT_OPTIONS`** *(optional)*
 	Additional options to pass to gmvault (such as `--c no`).
 
-* **`GMVAULT_QUICK_SYNC_SCHEDULE`** *(optional)*  
+* **`GMVAULT_QUICK_SYNC_SCHEDULE`** *(optional)*
 	Custom quick sync schedule; defaults to daily.
 
-* **`GMVAULT_FULL_SYNC_SCHEDULE`** *(optional)*  
+* **`GMVAULT_FULL_SYNC_SCHEDULE`** *(optional)*
 	Custom full sync schedule; defaults to weekly.
 
-* **`GMVAULT_SYNC_ON_STARTUP`** *(optional)*  
+* **`GMVAULT_SYNC_ON_STARTUP`** *(optional)*
 	Set to `yes` to trigger a sync when the container starts, in addition to the
 	normal cron schedule.
 
